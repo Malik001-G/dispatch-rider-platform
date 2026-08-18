@@ -2,7 +2,7 @@
 
 A last mile delivery system for social commerce vendors in dense Nigerian markets, built around bicycle riders and orders that can have more than one delivery address.
 
-This is a Spring Boot backend for the MVP described in the project's Business Requirements Document. I'm writing this README more like a short project writeup than a plain setup guide, since it doubles as documentation for a scholarship application.
+This is a Spring Boot backend for the MVP described in the project's Business Requirements Document. It covers the reasoning behind the main design choices, not just how to run it.
 
 ## What problem this solves
 
@@ -94,7 +94,7 @@ POST   /api/payments/webhook               (public, Paystack signature checked)
 
 * No file upload for rider ID verification. Right now it just expects a URL, actual upload handling to something like S3 wasn't part of the requirements doc
 * The payment webhook looks up the matching order by scanning all orders instead of an indexed query. Fine at pilot volume, should be fixed before this grows
-* No automated tests. If I had more time this is the first thing I'd add, especially for the pricing logic, the stop sequencing, and the refund scheduler, since those carry the most business logic
+* No automated tests. If there was more time this is the first thing to add, especially for the pricing logic, the stop sequencing, and the refund scheduler, since those carry the most business logic
 * Login is just phone number and password, no refresh tokens, no OTP login
 * This code has been checked carefully by hand against the requirements doc but hasn't been compiled and run end to end yet. Running mvn compile locally should be the first step before treating it as finished
 
