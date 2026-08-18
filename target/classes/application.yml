@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: dispatch-rider-platform
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/dispatch_rider_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 8088
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:change-this-dev-secret-change-this-dev-secret-32bytes}
+    expiration-ms: 86400000
+
+  hub:
+    default-name: "Ikorodu Garage"
+    default-center-lat: 6.6018
+    default-center-lng: 3.5106
+    default-radius-km: 5.0
+
+  pricing:
+    pickup-fee-naira: 500
+    stop-base-fee-naira: 500
+    per-km-rate-naira: 100
+    stop-fee-floor-naira: 800
+
+  assignment:
+    unassigned-payment-window-minutes: 30
+
+  distance-matrix:
+    use-mock: ${DISTANCE_MATRIX_USE_MOCK:true}
+    google-api-key: ${GOOGLE_DISTANCE_MATRIX_API_KEY:}
+    google-base-url: https://maps.googleapis.com/maps/api/distancematrix/json
+
+  paystack:
+    secret-key: ${PAYSTACK_SECRET_KEY:sk_test_52d2cc193b81d132bd5c5b7bf88f2d236f7fcd68}
+    base-url: https://api.paystack.co
+    callback-url: ${PAYSTACK_CALLBACK_URL:http://localhost:8088/api/payments/callback}
+
+logging:
+  level:
+    com.dispatchrider.platform: INFO
